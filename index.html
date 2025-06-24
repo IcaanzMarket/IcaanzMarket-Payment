@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icaanz Payment</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #00b894;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: var(--dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-section {
+            padding: 2rem;
+        }
+        
+        .payment-method {
+            margin-bottom: 2rem;
+            background: var(--light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .payment-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .qr-code:hover {
+            transform: scale(1.03);
+        }
+        
+        .info {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .info-item {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        
+        .info-value {
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+        
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .fee-table th, .fee-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .fee-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .fee-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .fee-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .note {
+            font-style: italic;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fff9e6;
+            border-radius: 10px;
+            border-left: 4px solid #ffd43b;
+        }
+        
+        @media (max-width: 600px) {
+            .payment-details {
+                flex-direction: column;
+            }
+            
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://files.catbox.moe/58qh00.jpg" alt="Icaanz Payment Logo" class="logo">
+            <h1>Icaanz Payment</h1>
+            <p class="description">Pembayaran Aman Dengan Dana Dan Qris</p>
+        </header>
+        
+        <div class="payment-section">
+            <div class="payment-method">
+                <h2>💳 Pembayaran Via Dana</h2>
+                <div class="payment-details">
+                    <div class="info">
+                        <div class="info-item">
+                            <span class="info-label">Nomor Dana</span>
+                            <span class="info-value">083846701246</span>
+                        </div>
+                        <div class="note">
+                            Mohon Sertakan Bukti Dengan Screenshot Bukti Transfer Anda
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-method">
+                <h2>📱 Pembayaran Via QRIS</h2>
+                <div class="payment-details">
+                    <img src="https://files.catbox.moe/22qm8h.jpg" alt="QRIS Code" class="qr-code">
+                    <div class="info">
+                        <div class="info-item">
+                            <span class="info-label">Scan QR Code di atas</span>
+                            <span class="info-value">Untuk melakukan pembayaran melalui aplikasi bank atau e-wallet yang mendukung QRIS</span>
+                        </div>
+                        <div class="note">
+                            Mohon Sertakan Bukti Dengan Screenshot Bukti Transfer Anda
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-method">
+                <h2>💰 Fee Mc</h2>
+                <table class="fee-table">
+                    <thead>
+                        <tr>
+                            <th>Nominal</th>
+                            <th>Biaya</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0 - 100</td>
+                            <td>1K</td>
+                        </tr>
+                        <tr>
+                            <td>101 - 300</td>
+                            <td>2K</td>
+                        </tr>
+                        <tr>
+                            <td>301 - 700</td>
+                            <td>4K</td>
+                        </tr>
+                        <tr>
+                            <td>701 - 1Jt</td>
+                            <td>7K</td>
+                        </tr>
+                        <tr>
+                            <td>1Jt - Seterusnya</td>
+                            <td>2%</td>
+                        </tr>
+                        <tr>
+                            <td>BT/TT</td>
+                            <td>5K</td>
+                        </tr>
+                        <tr>
+                            <td>Delay</td>
+                            <td>5K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            Terimakasih Atas Pembelianmu Kami Menantimu Kembali
+        </footer>
+    </div>
+</body>
+</html>
