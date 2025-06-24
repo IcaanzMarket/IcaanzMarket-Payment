@@ -4,212 +4,334 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Icaanz Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --accent: #fd79a8;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --success: #00b894;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #60a5fa;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --text: #334155;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem;
-            color: var(--dark);
+            padding: 2rem 1rem;
+            color: var(--text);
+            line-height: 1.6;
         }
         
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             margin: 2rem 0;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .container:hover {
             transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
         }
         
         header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 3rem 2rem;
             text-align: center;
             color: white;
             position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, var(--accent), #f97316);
         }
         
         .logo {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
+            border: 6px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 2;
+            position: relative;
         }
         
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(5deg);
         }
         
         h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .description {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.95;
             margin-bottom: 1.5rem;
+            font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .payment-section {
-            padding: 2rem;
+            padding: 3rem;
         }
         
         .payment-method {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             background: var(--light);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
         }
         
         .payment-method:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
         }
         
         h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.7rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            font-weight: 700;
         }
         
         .payment-details {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 3rem;
             align-items: center;
         }
         
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
         .qr-code {
-            width: 200px;
-            height: 200px;
-            border-radius: 10px;
+            width: 240px;
+            height: 240px;
+            border-radius: 12px;
             object-fit: cover;
-            border: 1px solid #eee;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
+            background: white;
+            padding: 12px;
         }
         
         .qr-code:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
         
         .info {
             flex: 1;
-            min-width: 250px;
+            min-width: 300px;
         }
         
         .info-item {
-            margin-bottom: 1rem;
-            padding: 0.8rem;
+            margin-bottom: 1.25rem;
+            padding: 1rem;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-2px);
         }
         
         .info-label {
             font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.3rem;
-            display: block;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
         }
         
         .info-value {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .copy-btn {
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            margin-left: 1rem;
+        }
+        
+        .copy-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .copy-btn.copied {
+            background: var(--success);
         }
         
         .fee-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            border-radius: 10px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
             overflow: hidden;
+            background: white;
         }
         
         .fee-table th, .fee-table td {
-            padding: 0.8rem 1rem;
+            padding: 1rem 1.5rem;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #e2e8f0;
         }
         
         .fee-table th {
             background-color: var(--primary);
             color: white;
+            font-weight: 600;
         }
         
         .fee-table tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color: #f8fafc;
         }
         
         .fee-table tr:last-child td {
             border-bottom: none;
         }
         
+        .fee-table tr:hover {
+            background-color: #f1f5f9;
+        }
+        
         footer {
             text-align: center;
-            padding: 1.5rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
         }
         
         .note {
             font-style: italic;
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #fff9e6;
-            border-radius: 10px;
-            border-left: 4px solid #ffd43b;
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: #eff6ff;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent);
+            color: var(--dark);
+            font-size: 1.05rem;
         }
         
-        @media (max-width: 600px) {
+        .note strong {
+            color: var(--primary-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 16px;
+            }
+            
+            header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .payment-section {
+                padding: 2rem 1.5rem;
+            }
+            
             .payment-details {
                 flex-direction: column;
+                gap: 2rem;
             }
             
             .qr-code {
-                width: 180px;
-                height: 180px;
+                width: 200px;
+                height: 200px;
             }
             
             h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+            
+            .info {
+                min-width: 100%;
+            }
+            
+            .info-value {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .copy-btn {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -224,38 +346,50 @@
         
         <div class="payment-section">
             <div class="payment-method">
-                <h2>💳 Pembayaran Via Dana</h2>
+                <h2><i class="fas fa-wallet"></i> Pembayaran Via Dana</h2>
                 <div class="payment-details">
                     <div class="info">
                         <div class="info-item">
-                            <span class="info-label">Nomor Dana</span>
-                            <span class="info-value">083846701246</span>
+                            <span class="info-label"><i class="fas fa-phone-alt"></i> Nomor Dana</span>
+                            <span class="info-value">
+                                083846701246
+                                <button class="copy-btn" onclick="copyToClipboard('083846701246')">
+                                    <i class="far fa-copy"></i> Salin
+                                </button>
+                            </span>
                         </div>
                         <div class="note">
-                            Mohon Sertakan Bukti Dengan Screenshot Bukti Transfer Anda
+                            <strong>Perhatian:</strong> Mohon Sertakan Bukti Dengan Screenshot Bukti Transfer Anda
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="payment-method">
-                <h2>📱 Pembayaran Via QRIS</h2>
+                <h2><i class="fas fa-qrcode"></i> Pembayaran Via QRIS</h2>
                 <div class="payment-details">
-                    <img src="https://files.catbox.moe/22qm8h.jpg" alt="QRIS Code" class="qr-code">
+                    <div class="qr-container">
+                        <img src="https://files.catbox.moe/22qm8h.jpg" alt="QRIS Code" class="qr-code">
+                        <button class="copy-btn" onclick="copyToClipboard('https://files.catbox.moe/22qm8h.jpg')">
+                            <i class="fas fa-link"></i> Salin Link QR
+                        </button>
+                    </div>
                     <div class="info">
                         <div class="info-item">
-                            <span class="info-label">Scan QR Code di atas</span>
-                            <span class="info-value">Untuk melakukan pembayaran melalui aplikasi bank atau e-wallet yang mendukung QRIS</span>
+                            <span class="info-label"><i class="fas fa-info-circle"></i> Petunjuk Pembayaran</span>
+                            <span class="info-value">
+                                Scan QR Code di atas menggunakan aplikasi bank atau e-wallet yang mendukung QRIS
+                            </span>
                         </div>
                         <div class="note">
-                            Mohon Sertakan Bukti Dengan Screenshot Bukti Transfer Anda
+                            <strong>Catatan:</strong> Pastikan screenshot bukti transfer jelas terbaca sebelum mengirimkannya
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="payment-method">
-                <h2>💰 Fee Mc</h2>
+                <h2><i class="fas fa-money-bill-wave"></i> Fee Merchant</h2>
                 <table class="fee-table">
                     <thead>
                         <tr>
@@ -294,6 +428,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="note">
+                    <strong>Keterangan:</strong> BT/TT = Bank Transfer/Teller Transfer
+                </div>
             </div>
         </div>
         
@@ -301,5 +438,29 @@
             Terimakasih Atas Pembelianmu Kami Menantimu Kembali
         </footer>
     </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const buttons = document.querySelectorAll('.copy-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = btn.innerHTML.replace('Tersalin', 'Salin');
+                    btn.innerHTML = btn.innerHTML.replace('fa-check', 'fa-copy');
+                });
+                
+                const clickedBtn = event.currentTarget;
+                clickedBtn.classList.add('copied');
+                clickedBtn.innerHTML = '<i class="fas fa-check"></i> Tersalin';
+                
+                setTimeout(() => {
+                    clickedBtn.classList.remove('copied');
+                    clickedBtn.innerHTML = '<i class="far fa-copy"></i> Salin';
+                }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
