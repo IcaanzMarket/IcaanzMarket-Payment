@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Icaanz</title>
+    <title>TERAWANG MASA DEPAN</title>
     <style>
         * {
             margin: 0;
@@ -11,262 +11,225 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        header {
-            background-color: #1e88e5;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        
-        .payment-method {
+            min-height: 100vh;
             padding: 20px;
         }
-        
-        .method {
-            margin-bottom: 25px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .method:hover {
-            border-color: #1e88e5;
-            box-shadow: 0 2px 10px rgba(30, 136, 229, 0.2);
-        }
-        
-        .method-title {
-            color: #1e88e5;
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
-        .dana-number {
-            background-color: #f0f7ff;
-            padding: 12px;
-            border-radius: 6px;
+
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 30px;
         }
-        
-        .number {
-            font-size: 16px;
-            font-weight: 500;
-            color: #0d47a1;
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            flex-grow: 1;
         }
-        
-        .copy-btn {
-            background-color: #1e88e5;
+
+        .creator {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .input-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 15px;
+            width: 70%;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        button {
+            padding: 15px 25px;
+            background-color: #ff6b6b;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
+            border-radius: 0 50px 50px 0;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
-        
-        .copy-btn:hover {
-            background-color: #1565c0;
+
+        button:hover {
+            background-color: #ff8e8e;
+            transform: translateY(-2px);
         }
-        
-        .qris-container {
-            text-align: center;
-            margin-top: 15px;
-        }
-        
-        .qris-img {
-            width: 200px;
-            height: auto;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .qris-img:hover {
-            transform: scale(1.05);
-        }
-        
-        .modal {
+
+        .result-section {
             display: none;
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            overflow: auto;
-        }
-        
-        .modal-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        
-        .modal-img {
-            max-width: 80%;
-            max-height: 80%;
-        }
-        
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-        }
-        
-        .instructions {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .admin-contact {
-            background-color: #f0f7ff;
-            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 0 auto;
             text-align: center;
-            margin-top: 20px;
-            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        
-        .admin-btn {
-            display: inline-block;
-            background-color: #1e88e5;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: 500;
-            transition: background-color 0.3s;
+
+        .result-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffd700;
         }
-        
-        .admin-btn:hover {
-            background-color: #1565c0;
+
+        .result-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            display: block;
         }
-        
+
+        .result-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
         footer {
             text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            input {
+                width: 60%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Payment Icaanz</h1>
-            <p>Lakukan pembayaran melalui metode berikut</p>
-        </header>
-        
-        <div class="payment-method">
-            <div class="method">
-                <h2 class="method-title">DANA</h2>
-                <div class="dana-number">
-                    <span class="number" id="danaNumber">083846701246</span>
-                    <button class="copy-btn" onclick="copyToClipboard()">Salin</button>
-                </div>
-                <p class="instructions">1. Buka aplikasi DANA<br>
-                2. Masukkan nomor di atas<br>
-                3. Lakukan pembayaran</p>
-            </div>
-            
-            <div class="method">
-                <h2 class="method-title">QRIS</h2>
-                <div class="qris-container">
-                    <img src="https://i.supaimg.com/ae8649c1-59c2-41a4-b5a2-ce11496ad920.jpg" alt="QR Code" class="qris-img" id="qrisImg">
-                    <p class="instructions">Klik QR Code untuk memperbesar</p>
-                </div>
-            </div>
-            
-            <div class="admin-contact">
-                <p>Sudah melakukan pembayaran? Konfirmasi ke admin:</p>
-                <a href="https://www.instagram.com/icaanzmarket?igsh=MXIwbmI2ZjBwejEyMg==" class="admin-btn" target="_blank">Chat Admin</a>
-            </div>
-        </div>
+    <header>
+        <h1>TERAWANG MASA DEPAN</h1>
+        <div class="creator">Dibuat oleh: Nizam</div>
+    </header>
+
+    <div class="input-section">
+        <input type="text" id="namaInput" placeholder="Masukkan nama Anda">
+        <button onclick="terawangMasaDepan()">TERAWANG</button>
     </div>
-    
-    <div id="qrisModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <img src="https://i.supaimg.com/ae8649c1-59c2-41a4-b5a2-ce11496ad920.jpg" alt="QR Code" class="modal-img" id="modalImg">
-        </div>
+
+    <div class="result-section" id="resultSection">
+        <h2 class="result-title" id="resultTitle">HASIL TERAWANGAN</h2>
+        <img class="result-image" id="resultImage" src="" alt="Gambar Masa Depan">
+        <p class="result-description" id="resultDescription"></p>
     </div>
-    
+
     <footer>
-        &copy; Payment Icaanz Market
+        &copy; 2023 Terawang Masa Depan - Hiburan semata, jangan dipercaya sepenuhnya!
     </footer>
-    
+
     <script>
-        // Fungsi untuk menyalin nomor DANA
-        function copyToClipboard() {
-            const danaNumber = document.getElementById('danaNumber');
-            const textArea = document.createElement('textarea');
-            textArea.value = danaNumber.textContent;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
+        function terawangMasaDepan() {
+            const nama = document.getElementById('namaInput').value || 'Anda';
+            const results = [
+                {
+                    title: "SUKSES",
+                    image: "https://cdn.pixabay.com/photo/2018/05/18/15/30/web-design-3411373_960_720.jpg",
+                    description: `${nama} akan menjadi orang yang sangat sukses! Kekayaan dan kebahagiaan akan menyertai perjalanan hidup ${nama}.`
+                },
+                {
+                    title: "MENDERITA",
+                    image: "https://cdn.pixabay.com/photo/2019/11/13/20/44/poverty-4624795_960_720.jpg",
+                    description: `Sayangnya, ${nama} akan mengalami banyak penderitaan dalam hidup. Tetapi jangan menyerah, karena setiap kesulitan pasti ada hikmahnya.`
+                },
+                {
+                    title: "NERAKA",
+                    image: "https://cdn.pixabay.com/photo/2020/02/08/21/36/hell-4831002_960_720.png",
+                    description: `Astagfirullah! ${nama} perlu banyak beribadah dan memperbaiki diri, karena terawangan menunjukkan akhir yang tidak baik.`
+                },
+                {
+                    title: "SURGA",
+                    image: "https://cdn.pixabay.com/photo/2015/09/02/15/05/heaven-919074_960_720.jpg",
+                    description: `${nama} adalah orang yang beruntung! Kehidupan akhirat ${nama} akan dijamin surga dengan segala kenikmatannya.`
+                },
+                {
+                    title: "KORUPTOR",
+                    image: "https://cdn.pixabay.com/photo/2019/11/07/20/49/prison-4609625_960_720.jpg",
+                    description: `Wahai ${nama}, hati-hati dengan godaan harta! Ramalan menunjukkan ${nama} akan terjerumus dalam korupsi jika tidak waspada.`
+                },
+                {
+                    title: "PRESIDEN",
+                    image: "https://cdn.pixabay.com/photo/2016/09/10/11/11/president-1659235_960_720.png",
+                    description: `Luar biasa! ${nama} akan menjadi pemimpin bangsa di masa depan. Persiapkan diri dari sekarang untuk membawa perubahan positif.`
+                },
+                {
+                    title: "DOKTER",
+                    image: "https://cdn.pixabay.com/photo/2016/11/08/05/20/surgery-1807541_960_720.jpg",
+                    description: `${nama} akan menjadi seorang dokter yang hebat! Banyak nyawa akan diselamatkan oleh ${nama} di masa depan.`
+                },
+                {
+                    title: "GURU",
+                    image: "https://cdn.pixabay.com/photo/2017/09/06/18/21/teacher-2722166_960_720.jpg",
+                    description: `${nama} ditakdirkan menjadi pendidik generasi penerus! Ilmu yang ${nama} bagikan akan bermanfaat bagi banyak orang.`
+                },
+                {
+                    title: "TENTARA",
+                    image: "https://cdn.pixabay.com/photo/2019/02/06/05/12/soldier-3978295_960_720.jpg",
+                    description: `${nama} akan menjadi pelindung bangsa! Jiwa patriotisme ${nama} akan membawa pada karier gemilang di dunia militer.`
+                },
+                {
+                    title: "PENGEMIS",
+                    image: "https://cdn.pixabay.com/photo/2017/01/30/17/32/homeless-2021320_960_720.jpg",
+                    description: `Sayang sekali, ${nama} akan mengalami kesulitan finansial yang berat. Mulailah berhemat dan menabung dari sekarang.`
+                },
+                {
+                    title: "MATI",
+                    image: "https://cdn.pixabay.com/photo/2017/01/09/21/49/angel-1968236_960_720.png",
+                    description: `${nama} akan meninggal dengan tenang di usia lanjut, dikelilingi oleh orang-orang tercinta.`
+                }
+            ];
+
+            // Pilih hasil secara acak
+            const randomResult = results[Math.floor(Math.random() * results.length)];
             
-            // Ubah teks tombol sementara
-            const copyBtn = document.querySelector('.copy-btn');
-            copyBtn.textContent = 'Tersalin!';
-            setTimeout(() => {
-                copyBtn.textContent = 'Salin';
-            }, 2000);
-        }
-        
-        // Fungsi untuk menampilkan modal QRIS
-        const qrisImg = document.getElementById('qrisImg');
-        const modal = document.getElementById('qrisModal');
-        const modalImg = document.getElementById('modalImg');
-        
-        qrisImg.onclick = function() {
-            modal.style.display = 'block';
-        }
-        
-        // Fungsi untuk menutup modal
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-        
-        // Tutup modal ketika klik di luar gambar
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
+            // Tampilkan hasil
+            document.getElementById('resultTitle').textContent = `MASA DEPAN ${nama}: ${randomResult.title}`;
+            document.getElementById('resultImage').src = randomResult.image;
+            document.getElementById('resultImage').alt = randomResult.title;
+            document.getElementById('resultDescription').textContent = randomResult.description;
+            
+            // Tampilkan section hasil
+            document.getElementById('resultSection').style.display = 'block';
+            
+            // Scroll ke hasil
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
